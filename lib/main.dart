@@ -1,61 +1,59 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  GoogleMapController myMapController;
-  final Set<Marker> _markers = new Set();
-  static const LatLng _mainLocation = const LatLng(25.69893, 32.6421);
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('Maps With Marker'),
-              backgroundColor: Colors.blue[900],
-            ),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: GoogleMap(
-                    initialCameraPosition: CameraPosition(
-                      target: _mainLocation,
-                      zoom: 10.0,
-                    ),
-                    markers: this.myMarker(),
-                    mapType: MapType.normal,
-                    onMapCreated: (controller) {
-                      setState(() {
-                        myMapController = controller;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            )));
+      title: 'Flutter Google Maps Demo',
+      home: MapSample(),
+    );
+  }
+}
+
+class MapSample extends StatefulWidget {
+  @override
+  State<MapSample> createState() => MapSampleState();
+}
+
+class MapSampleState extends State<MapSample> {
+  Completer<GoogleMapController> _controller = Completer();
+
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+
+  static final CameraPosition _kLake = CameraPosition(
+      bearing: 192.8334901395799,
+      target: LatLng(37.43296265331129, -122.08832357078792),
+      tilt: 59.440717697143555,
+      zoom: 19.151926040649414);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: GoogleMap(
+        mapType: MapType.hybrid,
+        initialCameraPosition: _kGooglePlex,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: Text('To the lake!'),
+        icon: Icon(Icons.directions_boat),
+      ),
+    );
   }
 
-  Set<Marker> myMarker() {
-    setState(() {
-      _markers.add(Marker(
-        // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId(_mainLocation.toString()),
-        position: _mainLocation,
-        infoWindow: InfoWindow(
-          title: 'Historical City',
-          snippet: '5 Star Rating',
-        ),
-        icon: BitmapDescriptor.defaultMarker,
-      ));
-    });
-
-    return _markers;
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 }
