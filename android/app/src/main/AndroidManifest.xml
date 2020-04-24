@@ -10,7 +10,7 @@
         android:label="map_zenly"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAl35gtoKyqqv6dM0Vkb5wevIxBYFnnVwE"/>
+            android:value="AIzaSyBQf_aZ_YS86vRW0T3uKd0sishQp_jW1CM"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
