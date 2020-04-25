@@ -89,16 +89,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  _animateToUser() async {
-    var pos = await Location().getLocation();
-
-    _controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: LatLng(pos.latitude, pos.longitude),
-        ),
-      ),
-    );
-  }
 }
