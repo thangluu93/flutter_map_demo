@@ -18,21 +18,36 @@ class _SignIn extends State<SignIn> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.fromLTRB(15.0, 55.0, 0.0, 0.0),
+            padding: EdgeInsets.fromLTRB(15.0, 55.0, 10.0, 0.0),
             child: Stack(
               children: <Widget>[
                 Column(
                   children: <Widget>[
                     Row(
-                      children: <Widget>[Text("Hello",style: TextStyle(fontSize: 70,fontWeight: FontWeight.bold),)],
+                      children: <Widget>[
+                        Text(
+                          "Hello",
+                          style: TextStyle(
+                              fontSize: 70, fontWeight: FontWeight.bold),
+                        )
+                      ],
                     ),
                     Row(
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            Text('Friends',style: TextStyle(fontSize: 70,fontWeight: FontWeight.bold),),
-                            Text('.',style: TextStyle(fontSize: 70, fontWeight: FontWeight.bold,color: Colors.green),),
-
+                            Text(
+                              'Friends',
+                              style: TextStyle(
+                                  fontSize: 70, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              '.',
+                              style: TextStyle(
+                                  fontSize: 70,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green),
+                            ),
                           ],
                         ),
                       ],
@@ -47,36 +62,40 @@ class _SignIn extends State<SignIn> {
             child: Column(
               children: <Widget>[
                 Container(
-                 height:70, child:TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                  height: 70,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'User Name',
+                      labelStyle: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
                     ),
+                    obscureText: true,
                   ),
-                  obscureText: true,
-                ),),
+                ),
                 SizedBox(
                   height: 10.0,
                 ),
-               Container(
-                 height:70, child:TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                Container(
+                  height: 70,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
                     ),
+                    obscureText: true,
                   ),
-                  obscureText: true,
-                ),),
+                ),
                 SizedBox(height: 5.0),
                 Container(
                   alignment: Alignment(1.0, 0.0),
@@ -94,6 +113,7 @@ class _SignIn extends State<SignIn> {
                 ),
                 SizedBox(height: 40.0),
                 Container(
+                  width: 350.0,
                   height: 40.0,
                   child: Material(
                     borderRadius: BorderRadius.circular(20.0),
@@ -104,7 +124,7 @@ class _SignIn extends State<SignIn> {
                       onTap: () {},
                       child: Center(
                         child: Text(
-                          'Continue With Google',
+                          'LOGIN',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -114,67 +134,17 @@ class _SignIn extends State<SignIn> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
                 Container(
-                  height: 40.0,
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          style: BorderStyle.solid,
-                          width: 1.0,
-                        ),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                            child: ImageIcon(
-                                AssetImage('assets/icons/facebook_icon.png'))),
-                        Center(
-                          child: Text(
-                            'Continue With Facebook',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+                  padding: EdgeInsets.only(top: 15),
+                  child: InkWell(
+                      child: Text(
+                    'Create Account?',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
                     ),
-                  ),
-                ),
-                  SizedBox(height: 20.0),
-                Container(
-                  height: 40.0,
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          style: BorderStyle.solid,
-                          width: 1.0,
-                        ),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Center(
-                            child: ImageIcon(
-                                AssetImage('assets/icons/facebook_icon.png'))),
-                        Center(
-                          child: Text(
-                            'Continue With Phone Number',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  )),
                 )
               ],
             ),
