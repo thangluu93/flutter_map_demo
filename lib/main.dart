@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-// import 'package:map_zenly/Pages/home_page.dart';
-import 'package:map_zenly/Pages/sign_in.dart';
+import 'package:map_zenly/Pages/root_page.dart';
+
+
 
 void main() => runApp(MyApp());
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SignIn(),
+      home: RootPage(),
     );
   }
 }

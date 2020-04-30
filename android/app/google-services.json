@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "971545327928-q6ho8oif92p9f5iitvlc8fpi0qm6ej6l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.map_zenly",
+            "certificate_hash": "4e397719b6ac267594e36870e4e3aab417343764"
+          }
+        },
+        {
           "client_id": "971545327928-jrsscbst2lm3bghucrh2gttd79ejrlto.apps.googleusercontent.com",
           "client_type": 3
         }
