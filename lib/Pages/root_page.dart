@@ -6,7 +6,7 @@ import 'package:map_zenly/Pages/home_page.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({Key key, this.auth}) : super(key: key);
-  final BaseAuth auth;
+  final Auth auth;
 
   @override
   State<StatefulWidget> createState() => new _RootPageState();
@@ -24,9 +24,14 @@ class _RootPageState extends State<RootPage> {
   initState() {
     super.initState();
     widget.auth.currentUser().then((userId) {
-      setState(() {
+      if (userId != null) {
+              setState(() {
         authStatus = userId != null ? AuthStatus.signedIn : AuthStatus.notSignedIn;
       });
+      } else {
+
+      }
+
     });
   }
 

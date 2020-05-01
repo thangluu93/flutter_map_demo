@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:map_zenly/Pages/root_page.dart';
+import 'package:map_zenly/models/auth.dart';
 
 
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final Auth _auth = Auth();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: RootPage(),
+      home: RootPage(auth: _auth,),
     );
   }
 }
