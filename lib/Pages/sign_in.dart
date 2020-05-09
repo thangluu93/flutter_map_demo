@@ -1,6 +1,12 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
+import 'package:map_zenly/Pages/home_page.dart';
+import 'package:map_zenly/Pages/root_page.dart';
 import 'package:map_zenly/models/primary_button.dart';
 import 'package:map_zenly/models/auth.dart';
+import 'package:map_zenly/Pages/create_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title, this.auth, this.onSignIn}) : super(key: key);
@@ -22,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   String _password;
   FormType _formType = FormType.login;
   String _authHint = '';
+  CreateProfile createProfile = CreateProfile();
 
   bool validateAndSave() {
     final form = formKey.currentState;
@@ -105,10 +112,60 @@ class _LoginPageState extends State<LoginPage> {
 
   List<Widget> socialLogin() {
     return [
-    logo(child: Image.asset('./assets/icons/facebook_icon.png')),
-    logo(child: Image.asset('./assets/icons/google_icon.png')),
-    logo(child:Image.asset('./assets/icons/telephone_icon.png')),
+      logo(
+        child: new GestureDetector(
+          child: Image.asset('./assets/icons/facebook_icon.png'),
+          onTap: () {},
+        ),
+      ),
+      logo(
+        child: new GestureDetector(
+          child: Image.asset('./assets/icons/google_icon.png'),
+          onTap: () {
+            widget.auth.signInWithGoogle().whenComplete(() {
+              widget.auth.currentUser().then((uid) {
+                print('User ID is: $uid');
+                checkExist(uid).then((isExits) {
+                  print('isExits: $isExits');
+                  if (isExits==false) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateProfile()));
+                  }else{
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomePage(auth:widget.auth,)));
+                  }
+                });
+              });
+            });
+          },
+        ),
+      ),
+      logo(
+        child: new GestureDetector(
+          child: Image.asset('./assets/icons/telephone_icon.png'),
+          onTap: () {},
+        ),
+      ),
     ];
+  }
+
+  static Future<bool> checkExist(String uid) async {
+    bool exists = false;
+    try {
+      await Firestore.instance.document("users/$uid").get().then((doc) {
+        if (doc.exists)
+          exists = true;
+        else
+          exists = false;
+      });
+      return exists;
+    } catch (e) {
+      return false;
+    }
   }
 
   List<Widget> submitWidgets() {
@@ -178,9 +235,8 @@ class _LoginPageState extends State<LoginPage> {
                                 ))),
                         new Center(
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: socialLogin(),
-                          ),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: socialLogin()),
                         ),
                       ],
                     ),

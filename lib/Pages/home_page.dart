@@ -6,34 +6,33 @@ class HomePage extends StatelessWidget {
   final BaseAuth auth;
   final VoidCallback onSignOut;
 
-  @override
-  Widget build(BuildContext context) {
-
-    void _signOut() async {
+  void _signOut() async {
       try {
-        await auth.signOut();
-        onSignOut();
+        await this.auth.signOut();
+        // Bug is here !!!
+        onSignOut.call();
       } catch (e) {
         print(e);
       }
-
     }
 
+  @override
+  Widget build(BuildContext context) {
+    
     return new Scaffold(
-      appBar: new AppBar(
-        actions: <Widget>[
-          new FlatButton(
-              onPressed: _signOut,
-              child: new Text('Logout', style: new TextStyle(fontSize: 17.0, color: Colors.white))
-          )
-        ],
-      ),
-      body: new Center(
-        child: new Text(
-          'Welcome',
-          style: new TextStyle(fontSize: 32.0),
+        appBar: new AppBar(
+          actions: <Widget>[
+            new FlatButton(
+                onPressed: _signOut,
+                child: new Text('Logout',
+                    style: new TextStyle(fontSize: 17.0, color: Colors.white)))
+          ],
         ),
-      )
-    );
+        body: new Center(
+          child: new Text(
+            'Welcome',
+            style: new TextStyle(fontSize: 32.0),
+          ),
+        ));
   }
 }
